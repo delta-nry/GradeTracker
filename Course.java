@@ -25,7 +25,6 @@ public class Course {
 	public String getName() {
 		return name;
 	}
-
 	// Adds the passed in Grade to the list
 	public void addItem(Grade newItem) {
 		if (lastItem > marks.length)
