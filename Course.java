@@ -17,9 +17,18 @@ public class Course {
 		this.projectedMark = 0.0;
 		this.lastItem = 0;
 	}
+   	// Re-assigns a description for the Course
+	public void setName(String newName) {
+		this.name = newName;
+	}	
+	// Returns the assigned description
+	public String getName() {
+		return name;
+	}
+
 	// Adds the passed in Grade to the list
 	public void addItem(Grade newItem) {
-		if (lastItem > marks.size)
+		if (lastItem > marks.length)
 			this.increaseArraySize();
 		marks[lastItem++] = newItem;
 	}
