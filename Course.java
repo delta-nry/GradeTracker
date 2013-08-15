@@ -36,21 +36,19 @@ public class Course {
 		return creditContribution;
 	}
 	public void deleteItem(Grade toDel) {
+		Grade temp = null;
+		boolean isPresent = false;
 		for (int i = 0; i < lastItem; i++) {
-			if (marks[i].getName().equals(toDel.getName())) {
-				this.refillArray(i);
-				marks[i] = null;
+			if (marks[i].getName().equals(toDel.getName()) && i != lastItem-1) {
+				isPresent = true;
+				temp = marks[i];
+				marks[i] = marks[i+1];
+				marks[i+1] = temp;				
 			}
 		}
-	}
-	// Refills array with all items listed except for the item at passed in index
-	public void refillArray(int index) {
-		for (int i = 0; i < lastItem; i++) {
-			if (i == index) {
-			
-			} else {
-				
-			}
+		if (isPresent) {
+			marks[--lastItem] = null;
+			System.out.println("Deleted the following Grade" + toDel);
 		}
 	}
 	// Shows all items in the list
