@@ -39,5 +39,34 @@ public class Course {
 		}
 		marks = temp;
 	}
-
+	// Returns the credit contribution 
+	public int getCreditContribution() {
+		return creditContribution;
+	}
+	public void deleteItem(Grade toDel) {
+		Grade temp = null;
+		boolean isPresent = false;
+		for (int i = 0; i < lastItem; i++) {
+			if (marks[i].getName().equals(toDel.getName()) && i != lastItem-1) {
+				isPresent = true;
+				temp = marks[i];
+				marks[i] = marks[i+1];
+				marks[i+1] = temp;				
+			}
+		}
+		if (isPresent) {
+			marks[--lastItem] = null;
+			System.out.println("Deleted the following Grade" + toDel);
+		}
+	}
+	// Shows all items in the list
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < lastItem; i++) {
+			s += name + "\n";
+			s += "Credits: " + creditContribution + "\n";
+			s += "Current Mark: " + currMark + "\n";
+		}
+		return s;
+	}
 }
