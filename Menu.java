@@ -27,15 +27,24 @@ public class Menu {
 			boolean validInput = false;
 			while (!validInput) {
 				try {
-					System.out.println("\n" + "Enter 1 to get course names,");
-					System.out.println("Enter 2 to add a new course,");
+					System.out.println("\n" + "Enter 1 to get the list of registered course names,");
+					System.out.println("Enter 2 to register a new course,");
 					System.out.println("Enter 9 to quit:");
 					System.out.printf(" > ");
 					int choice = userInput.nextInt();
 					validInput = true;
 					switch (choice) {
 					case 1:
-						System.out.println(theManager.getCourseNames());
+						try {
+							// Check if no courses are recorded
+							if (theManager.getCourseNames().isEmpty()) {
+								System.out.println("\n" + "No courses are recorded; try adding a new one.");
+								break;
+							}
+							System.out.println(theManager.getCourseNames());
+						} catch (NullPointerException e) {
+							System.out.println("\n" + "No courses are availible; try adding a new one.");
+						}
 						break;
 					case 2:
 						// Flushes garbage input to prevent unintended actions

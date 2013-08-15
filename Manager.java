@@ -4,18 +4,15 @@ public class Manager {
 
     private Course[] courseList;
    	private int lastItem;
-    // Constructor that creates an array which contains courses (Note:
-    // Creates a dummy course to prevent NullPointerExceptions)
+    // Constructor that creates an array which contains courses
     public Manager() {
-        this.courseList = new Course[1];
+        this.courseList = new Course[0];
         this.lastItem = 0;
-        Course newCourse = new Course("nullCourse", 10, 4);
-		this.addCourse(newCourse);
     }
     // Adds the passed in Course to the list
 	public void addCourse(Course newItem) {
 		if (lastItem > courseList.length) {
-			this.increaseArraySize();
+			increaseArraySize();
 		}
 		courseList[lastItem++] = newItem;
 	}
