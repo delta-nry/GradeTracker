@@ -14,7 +14,7 @@ public class Menu {
 	}
 	// Adds the passed in Course to the list in the Manager object
 	public void addItem(Course newItem) {
-		theManager.addItem(newItem);
+		theManager.addCourse(newItem);
 	}
 	public void managerMenu() {
 		System.out.println("\n" + "ManagerMenu:");
@@ -40,18 +40,17 @@ public class Menu {
 					case 2:
 					    Course newCourse = new Course("newCourse", 10, 4);
 					    theManager.increaseArraySize();
-						theManager.addItem(newCourse);
-						System.out.println(theManager.getCourseNames());
+						this.addItem(newCourse);
 						break;
 					case 9:
 					    userHasQuit = true;
 						break;
 					default:
-						System.out.println("Couldn't understand request; try again");
+						System.out.println("\n" + "Couldn't understand request; try again");
 						break;
 					}
 				} catch (InputMismatchException e) {
-					System.out.println("Couldn't understand request; try again");
+					System.out.println("\n" + "Couldn't understand request; try again");
 					// Flushes garbage input to prevent infinite looping
 					userInput.nextLine();
 				}

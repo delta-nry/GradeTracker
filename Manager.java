@@ -4,19 +4,19 @@ public class Manager {
 
     private Course[] courseList;
    	private int lastItem;
-    // Constructor that creates an array of a certain size which
-    // contains courses
-    /////////////////////////////////////////////////////
-    // For now it constructs a generic course; later on we want
-    // this class to have a createCourse method and remove the
-    // constructor
+    // Constructor that creates an array which contains courses (Note:
+    // Creates a dummy course to prevent NullPointerExceptions)
     public Manager() {
         this.courseList = new Course[1];
+        this.lastItem = 0;
+        Course newCourse = new Course("nullCourse", 10, 4);
+		this.addCourse(newCourse);
     }
     // Adds the passed in Course to the list
-	public void addItem(Course newItem) {
-		if (lastItem > courseList.length)
+	public void addCourse(Course newItem) {
+		if (lastItem > courseList.length) {
 			this.increaseArraySize();
+		}
 		courseList[lastItem++] = newItem;
 	}
 	// Increases the array size by one whenever called, to prevent
@@ -31,14 +31,11 @@ public class Manager {
     // Displays name of course corresponding to its index value in the
     // courseList array
     public String getCourseNames() {
-    	/*
     	String s = "";
     	for (int i = 0; i < courseList.length; i++) {
-    		s += "\n";
+        	s += "\n";
         	s += courseList[i].getName();
     	}
-    	*/
-    	String s = courseList[0].getName();
         return s;
     }
 }
