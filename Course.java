@@ -19,7 +19,7 @@ public class Course {
 	}
 	// Adds the passed in Grade to the list
 	public void addItem(Grade newItem) {
-		if (lastItem > marks.size)
+		if (lastItem > marks.length)
 			this.increaseArraySize();
 		marks[lastItem++] = newItem;
 	}
@@ -31,5 +31,36 @@ public class Course {
 		}
 		marks = temp;
 	}
-
+	// Returns the credit contribution 
+	public int getCreditContribution() {
+		return creditContribution;
+	}
+	public void deleteItem(Grade toDel) {
+		for (int i = 0; i < lastItem; i++) {
+			if (marks[i].getName().equals(toDel.getName())) {
+				this.refillArray(i);
+				marks[i] = null;
+			}
+		}
+	}
+	// Refills array with all items listed except for the item at passed in index
+	public void refillArray(int index) {
+		for (int i = 0; i < lastItem; i++) {
+			if (i == index) {
+			
+			} else {
+				
+			}
+		}
+	}
+	// Shows all items in the list
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < lastItem; i++) {
+			s += name + "\n";
+			s += "Credits: " + creditContribution + "\n";
+			s += "Current Mark: " + currMark + "\n";
+		}
+		return s;
+	}
 }
