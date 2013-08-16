@@ -63,7 +63,7 @@ public class Course {
 	public String toString() {
 		String s = "";
 		if (lastItem == 0) {
-			System.out.printf("\n" + "No grades are recorded in this course.");	
+			System.out.printf("\n" + "No grades are recorded for this course.");	
 			return s;
 		}
 		for (int i = 0; i < lastItem; i++) {

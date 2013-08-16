@@ -44,7 +44,7 @@ public class Manager {
             --lastItem;
         }
     }
-    // Displays name of course corresponding to its index value in the
+    // Displays names of courses corresponding to their index values in the
     // courseList array
     public String getCourseNames() {
     	String s = "";
@@ -80,5 +80,9 @@ public class Manager {
     // Gets a course based on a passed in value
     public Course getCourse(int courseIndexNumber) {
         return courseList[courseIndexNumber];
+    }
+    // Gets the size of the courseList array
+    public int getCourseListSize() {
+        return courseList.length;
     }
 }

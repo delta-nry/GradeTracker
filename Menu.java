@@ -40,9 +40,9 @@ public class Menu {
 					switch (choice) {
 					case 1:
 						try {
-							// Check if no courses are recorded
+							// Check if no courses are registered
 							if (theManager.getCourseNames().isEmpty()) {
-								System.out.println("\n" + "No courses are recorded; try adding a new one.");
+								System.out.println("\n" + "No courses are registered; try adding a new one.");
 								break;
 							}
 							System.out.println(theManager.getCourseNames());
@@ -109,17 +109,21 @@ public class Menu {
 					case 4:
 						int inputCourse;
 						try {
+							if (theManager.getCourseListSize() == 0) {
+								System.out.println("\n" + "No courses are registered; try adding a new one.");
+								break;
+							}
 							System.out.println("Enter the number of a registered course:");
 							System.out.println(theManager.getCourseNames());
 							System.out.printf(" > ");
 							inputCourse = userInput.nextInt();
 							courseMenu(theManager.getCourse(inputCourse));
 						} catch (InputMismatchException e) {
-							System.out.println("\n" + "Invalid name; try again.");
+							System.out.println("\n" + "Invalid number; try again.");
 							// Flushes garbage input to prevent unintended actions
 							userInput.nextLine();
 						} catch (ArrayIndexOutOfBoundsException e) {
-							System.out.println("\n" + "Invalid name; try again.");
+							System.out.println("\n" + "Invalid number; try again.");
 							// Flushes garbage input to prevent unintended actions
 							userInput.nextLine();
 						}
