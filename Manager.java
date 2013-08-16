@@ -1,9 +1,8 @@
-// This class consists of an array which contains the users classes
-
+// This class contains an array which contains the users classes
 public class Manager {
 
     private Course[] courseList;
-   	private int lastItem;
+    private int lastItem;
     private String name;
     // Constructor that creates an array which contains courses
     public Manager() {
@@ -16,21 +15,20 @@ public class Manager {
         return name;
     }
     // Adds the passed in Course to the list
-	public void addCourse(Course newItem) {
-		if (lastItem > courseList.length) {
-			increaseArraySize();
-		}
-		courseList[lastItem++] = newItem;
-	}
-	// Increases the array size by one whenever called, to prevent
-	// NullPointerExceptions 
-	public void increaseArraySize() {
-		Course[] temp = new Course[courseList.length+1];
-		for (int i = 0; i < courseList.length; i++) {
-			temp[i] = courseList[i];
-		}
-		courseList = temp;
-	}
+    public void addCourse(Course newItem) {
+        if (lastItem > courseList.length) {
+            increaseArraySize();
+        }
+        courseList[lastItem++] = newItem;
+    }
+    // Increases the array size by one whenever called, to prevent NullPointerExceptions
+    public void increaseArraySize() {
+        Course[] temp = new Course[courseList.length+1];
+        for (int i = 0; i < courseList.length; i++) {
+            temp[i] = courseList[i];
+        }
+        courseList = temp;
+    }
     // Decreases the array size by one whenever called
     public void decreaseArraySize() {
         // Only decrease the array size if it is greater than one
@@ -47,11 +45,11 @@ public class Manager {
     // Displays names of courses corresponding to their index values in the
     // courseList array
     public String getCourseNames() {
-    	String s = "";
-    	for (int i = 0; i < courseList.length; i++) {
-        	s += "\n";
-        	s += i + ". " + courseList[i].getName();
-    	}
+        String s = "";
+        for (int i = 0; i < courseList.length; i++) {
+            s += "\n";
+            s += i + ". " + courseList[i].getName();
+        }
         return s;
     }
     // Deletes course from the list according to its index number

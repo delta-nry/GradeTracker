@@ -5,7 +5,10 @@ public class Grade {
 	private double worth;
 	private int myScore;
 	private int totalScore;
-	// Constructor for the Grade, which only requires a description and worth to course
+	/*
+     * Constructor for the Grade, which only requires a description 
+	 * and worth to course
+	 */
 	public Grade(String theName, double theWorth) {
 		this.name = theName;
 		this.worth = theWorth;
@@ -37,7 +40,9 @@ public class Grade {
 	public double getCurrMark() {
 		return currMark;
 	}
-	// Calculates current mark, if your score and total score are defined
+	/* Calculates current mark, if your score and total score are 
+	 * defined
+	 */
 	public void calculateCurrMark() {
 		double temp = (double)myScore * (double)totalScore;
 		if (temp > 1000.0)
