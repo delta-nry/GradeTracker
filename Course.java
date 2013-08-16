@@ -62,6 +62,10 @@ public class Course {
 	// Shows all items in the list
 	public String toString() {
 		String s = "";
+		if (lastItem == 0) {
+			System.out.printf("\n" + "No grades are recorded in this course.");	
+			return s;
+		}
 		for (int i = 0; i < lastItem; i++) {
 			s += name + "\n";
 			s += "Credits: " + creditContribution + "\n";

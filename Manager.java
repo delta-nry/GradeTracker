@@ -4,10 +4,16 @@ public class Manager {
 
     private Course[] courseList;
    	private int lastItem;
+    private String name;
     // Constructor that creates an array which contains courses
     public Manager() {
         this.courseList = new Course[0];
         this.lastItem = 0;
+        this.name = "Manager";
+    }
+    // Returns the assigned description
+    public String getName() {
+        return name;
     }
     // Adds the passed in Course to the list
 	public void addCourse(Course newItem) {
@@ -30,13 +36,11 @@ public class Manager {
         // Only decrease the array size if it is greater than one
         if (courseList.length > 1) {
             Course[] temp = new Course[courseList.length-1];
-            //String chk = String.valueOf(courseList.length-1);
-            //System.out.printf(chk);
             for (int i = 0; i < temp.length; i++) {
                 temp[i] = courseList[i];
             }
             courseList = temp;
-            // is this safe or is there a better way which doesn't require this?
+            // NOTE: Is this safe or is there a better way which doesn't require this?
             --lastItem;
         }
     }
@@ -46,7 +50,7 @@ public class Manager {
     	String s = "";
     	for (int i = 0; i < courseList.length; i++) {
         	s += "\n";
-        	s += courseList[i].getName();
+        	s += i + ". " + courseList[i].getName();
     	}
         return s;
     }
@@ -72,5 +76,9 @@ public class Manager {
         else {
             System.out.println("\n" + "There are no courses to delete.");
         }
+    }
+    // Gets a course based on a passed in value
+    public Course getCourse(int courseIndexNumber) {
+        return courseList[courseIndexNumber];
     }
 }
