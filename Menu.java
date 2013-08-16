@@ -29,6 +29,7 @@ public class Menu {
 				try {
 					System.out.println("\n" + "Enter 1 to get the list of registered course names,");
 					System.out.println("Enter 2 to register a new course,");
+					System.out.println("Enter 3 to delete the last registered course,");
 					System.out.println("Enter 9 to quit:");
 					System.out.printf(" > ");
 					int choice = userInput.nextInt();
@@ -98,6 +99,9 @@ public class Menu {
 					    Course newCourse = new Course(inputName, inputSize, inputCredits);
 					    theManager.increaseArraySize();
 						this.addItem(newCourse);
+						break;
+					case 3:
+						theManager.deleteLastCourse();
 						break;
 					case 9:
 					    userHasQuit = true;

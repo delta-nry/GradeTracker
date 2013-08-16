@@ -25,6 +25,21 @@ public class Manager {
 		}
 		courseList = temp;
 	}
+    // Decreases the array size by one whenever called
+    public void decreaseArraySize() {
+        // Only decrease the array size if it is greater than one
+        if (courseList.length > 1) {
+            Course[] temp = new Course[courseList.length-1];
+            //String chk = String.valueOf(courseList.length-1);
+            //System.out.printf(chk);
+            for (int i = 0; i < temp.length; i++) {
+                temp[i] = courseList[i];
+            }
+            courseList = temp;
+            // is this safe or is there a better way which doesn't require this?
+            --lastItem;
+        }
+    }
     // Displays name of course corresponding to its index value in the
     // courseList array
     public String getCourseNames() {
@@ -34,5 +49,28 @@ public class Manager {
         	s += courseList[i].getName();
     	}
         return s;
+    }
+    // Deletes course from the list according to its index number
+    // NOTE: Since a list is used, this method currently only deletes
+    // the greatest course in the list as well as decreasing the list
+    // size by 1
+    public void deleteLastCourse() {
+        if (courseList.length > 1) {
+            int toDelete = courseList.length - 1;
+            courseList[toDelete] = null;
+            decreaseArraySize();
+        }
+        // Clear the array and create a new one if it's length is 
+        // equal than 1 (has only one item left inside of it)
+        else if (courseList.length == 1) {
+            // This deletes the array entirely since its single value
+            // is set to null
+            courseList[0] = null;
+            this.courseList = new Course[0];
+            this.lastItem = 0;
+        }
+        else {
+            System.out.println("\n" + "There are no courses to delete.");
+        }
     }
 }
