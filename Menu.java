@@ -100,8 +100,6 @@ public class Menu {
                             }
                         }
                         Course newCourse = new Course(inputName, inputSize, inputCredits);
-                        // addCourse() automatically increases the courseList array
-                        //theManager.increaseArraySize();
                         theManager.addCourse(newCourse);
                         break;
                     case 3:
@@ -205,9 +203,6 @@ public class Menu {
                         }
                         Grade newGrade = new Grade(inputName, inputWorth);
                         selectedCourse.addItem(newGrade);
-                        //selectedCourse.calculateOverallMark();
-                        //System.out.println("\n" + selectedCourse.findGrade("Grade #1"));
-                        //System.out.println(selectedCourse.getOverallMark());
                         break;
                     case 3:
                         try {
@@ -216,7 +211,6 @@ public class Menu {
                                 System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
                                 break;
                             }
-                            //System.out.println("\n" + selectedCourse.findGrade("Grade #1"));
                             System.out.println(selectedCourse.getGradeNames());
                         } catch (NullPointerException e) {
                             System.out.println("\n" + "No grades are registered in this course; try adding a new one.");

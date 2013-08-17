@@ -169,16 +169,9 @@ public class Course {
      */
     public String toString() {
         String s = "";
-        /*
-        if (nextItem == 0) {
-            System.out.printf("\n" + "No grades are recorded for this course.");    
-            return s;
-        }
-        for (int i = 0; i < nextItem; i++) {
-        */
         s += "\n" + name + "\n";
         s += "Credits: " + creditContribution + "\n";
-        s += "Current Mark: " + currMark + "\n";
+        s += "Current Mark: " + currMark;
         return s;
     }
     /*
