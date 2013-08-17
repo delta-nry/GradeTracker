@@ -1,86 +1,58 @@
 // This class contains an array which contains the users classes
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Manager {
 
-    private Course[] courseList;
-    private int lastItem;
+    private List<Course> courseList = new ArrayList<Course>();
     private String name;
     // Constructor that creates an array which contains courses
     public Manager() {
-        this.courseList = new Course[0];
-        this.lastItem = 0;
         this.name = "Manager";
     }
     // Returns the assigned description
     public String getName() {
         return name;
     }
-    // Adds the passed in Course to the list
-    public void addCourse(Course newItem) {
-        if (lastItem > courseList.length) {
-            increaseArraySize();
-        }
-        courseList[lastItem++] = newItem;
+    // Gets a course based on a passed in value
+    public Course getCourse(int courseIndexNumber) {
+        return courseList.get(courseIndexNumber);
     }
-    // Increases the array size by one whenever called, to prevent NullPointerExceptions
-    public void increaseArraySize() {
-        Course[] temp = new Course[courseList.length+1];
-        for (int i = 0; i < courseList.length; i++) {
-            temp[i] = courseList[i];
-        }
-        courseList = temp;
-    }
-    // Decreases the array size by one whenever called
-    public void decreaseArraySize() {
-        // Only decrease the array size if it is greater than one
-        if (courseList.length > 1) {
-            Course[] temp = new Course[courseList.length-1];
-            for (int i = 0; i < temp.length; i++) {
-                temp[i] = courseList[i];
-            }
-            courseList = temp;
-            // NOTE: Is this safe or is there a better way which doesn't require this?
-            --lastItem;
-        }
-    }
-    // Displays names of courses corresponding to their index values in the
-    // courseList array
+    /*  Displays names of courses corresponding to their index values
+     *  in courseList. Each name is shown as "[i]. [courseName]", with
+     *  each course separated by newlines.
+     */
     public String getCourseNames() {
+        // Maybe use an iterator to replace i in the future
         String s = "";
-        for (int i = 0; i < courseList.length; i++) {
+        for (int i = 0; i < courseList.size(); i++) {
             s += "\n";
-            s += i + ". " + courseList[i].getName();
+            s += i + ". " + courseList.get(i);
+            // Do not add an extra newline to the last printed
+            // courseList element
+            if (i != courseList.size() - 1) {
+                s += "\n";
+            }
         }
         return s;
     }
-    // Deletes course from the list according to its index number
-    // NOTE: Since a list is used, this method currently only deletes
-    // the greatest course in the list as well as decreasing the list
-    // size by 1
+    // Gets the size of the courseList array
+    public int getCourseListSize() {
+        return courseList.size();
+    }
+    // Adds the passed in Course to the end of courseList
+    public void addCourse(Course newItem) {
+        courseList.add(newItem);
+    }
+    // Deletes course in the last index number of courseList.
     public void deleteLastCourse() {
-        if (courseList.length > 1) {
-            int toDelete = courseList.length - 1;
-            courseList[toDelete] = null;
-            decreaseArraySize();
-        }
-        // Clear the array and create a new one if it's length is 
-        // equal than 1 (has only one item left inside of it)
-        else if (courseList.length == 1) {
-            // This deletes the array entirely since its single value
-            // is set to null
-            courseList[0] = null;
-            this.courseList = new Course[0];
-            this.lastItem = 0;
+        if (courseList.size() >= 1) {
+            courseList.remove(courseList.size() - 1);
         }
         else {
             System.out.println("\n" + "There are no courses to delete.");
         }
-    }
-    // Gets a course based on a passed in value
-    public Course getCourse(int courseIndexNumber) {
-        return courseList[courseIndexNumber];
-    }
-    // Gets the size of the courseList array
-    public int getCourseListSize() {
-        return courseList.length;
     }
 }
