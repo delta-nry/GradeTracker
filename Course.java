@@ -8,10 +8,10 @@ public class Course {
     private double projectedMark;
     private int nextItem;
     /*
-     * Initializes the course, given:
-     * a course name
-     * amount of items you want in course
-     * the credit worth
+     *  Initializes the course, given:
+     *  a course name
+     *  amount of items you want in course
+     *  the credit worth.
      */
     public Course(String theName, int size, int credits) {
         this.name = theName;
@@ -21,6 +21,18 @@ public class Course {
         this.currMark = 0.0;
         this.projectedMark = 0.0;
         this.nextItem = 0;
+    }
+    // Sets the name of the course to the passed in name
+    public void setName(String newName) {
+        this.name = newName;
+    }
+    // Returns the name of the course
+    public String getName() {
+        return name;
+    }
+    // Returns the credit contribution 
+    public int getCreditContribution() {
+        return creditContribution;
     }
     /*
      *  Called on whenever you update one of the grades within
@@ -74,14 +86,6 @@ public class Course {
     public double getOverallMark() {
         return overallMark;
     }
-    // Sets the name of the course to the passed in name
-    public void setName(String newName) {
-        this.name = newName;
-    }
-    // Returns the name of the course
-    public String getName() {
-        return name;
-    }
     /*
      *  Checks first to see if the next slot "available"
      *  in the array is within the scope of the array, increases
@@ -96,6 +100,13 @@ public class Course {
     public void addItem(Grade newItem) {
         if (nextItem > marks.length)
             this.increaseArraySize();
+        // Check for an initial condition with an empty marks[] array
+        // and set nextItem to be one larger than marks.length, then
+        // increment the array size
+        if (nextItem == 0 && marks.length == 0) {
+            ++nextItem;
+            this.increaseArraySize();
+        }
         marks[nextItem++] = newItem;
         if (newItem.getCurrMark() != 0.0) {
             this.calculateCurrMark();
@@ -104,7 +115,7 @@ public class Course {
     }
     /*
      * Increases the array size by one whenever called
-     * to prevent NullPointerExceptions 
+     * to prevent NullPointerExceptions.
      */
     public void increaseArraySize() {
         Grade[] temp = new Grade[marks.length+1];
@@ -113,16 +124,12 @@ public class Course {
         }
         marks = temp;
     }
-    // Returns the credit contribution 
-    public int getCreditContribution() {
-        return creditContribution;
-    }
     /*
      *  Searches array for passed in Grade, and when found,
      *  shuffles it to the end of the array.
      *  Afterwards, if the item was found then the last item in the
      *  array (which is now the item we wanted to delete) is nullified
-     *  and nextItem is decremented by 1.*
+     *  and nextItem is decremented by 1.
      */
     public void deleteItem(Grade toDel) {
         Grade temp = null;
@@ -144,9 +151,9 @@ public class Course {
     /*
      *  Using a passed in String with the item's name, searches
      *  the array for the item with the corresponding name
-     *  and when found, returns it
+     *  and when found, returns it.
      *  If the item is not found, prints a message stating
-     *  that this case has been reached and returns null
+     *  that this case has been reached and returns null.
      */
     public Grade findGrade(String name) {
         for (int i = 0; i < nextItem; i++) {
@@ -157,17 +164,33 @@ public class Course {
         System.out.println(name + " not found.");
         return null;
     }
-    // Shows all items in the list
+    /*
+     *  Writes course information into a string.
+     */
     public String toString() {
         String s = "";
+        /*
         if (nextItem == 0) {
             System.out.printf("\n" + "No grades are recorded for this course.");    
             return s;
         }
         for (int i = 0; i < nextItem; i++) {
-            s += name + "\n";
-            s += "Credits: " + creditContribution + "\n";
-            s += "Current Mark: " + currMark + "\n";
+        */
+        s += "\n" + name + "\n";
+        s += "Credits: " + creditContribution + "\n";
+        s += "Current Mark: " + currMark + "\n";
+        return s;
+    }
+    /*
+     *  Displays names of Grades corresponding to their index 'i'
+     *  values in the marks[] array. Each name is shown as
+     *  "[i]. [gradeName]", with each Grade separated by newlines.
+     */
+    public String getGradeNames() {
+        String s = "";
+        for (int i = 0; i < marks.length; i++) {
+            s += "\n";
+            s += i + ". " + marks[i].getName();
         }
         return s;
     }

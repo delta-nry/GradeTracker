@@ -13,8 +13,8 @@ public class Menu {
         this.theManager = new Manager();
     }
     // Adds the passed in Course to the list in the Manager object
-    public void addItem(Course newItem) {
-        theManager.addCourse(newItem);
+    public void addCourse(Course newCourse) {
+        theManager.addCourse(newCourse);
     }
     // Accesses the user's courses
     public void managerMenu() {
@@ -100,8 +100,9 @@ public class Menu {
                             }
                         }
                         Course newCourse = new Course(inputName, inputSize, inputCredits);
-                        theManager.increaseArraySize();
-                        this.addItem(newCourse);
+                        // addCourse() automatically increases the courseList array
+                        //theManager.increaseArraySize();
+                        theManager.addCourse(newCourse);
                         break;
                     case 3:
                         theManager.deleteLastCourse();
@@ -143,7 +144,7 @@ public class Menu {
             }
         }
     }
-    // Accesses the user's selected course's statistics
+    // Accesses a selected course's statistics
     public void courseMenu(Course selectedCourse) {
         Scanner userInput = new Scanner(System.in);
         boolean userHasQuit = false;
@@ -157,13 +158,69 @@ public class Menu {
                     System.out.println("\n" + "----------");
                     System.out.println("\n" + "Menu for " + selectedCourse.getName());
                     System.out.println("\n" + "Enter 1 to get a string with course details,");
+                    System.out.println("Enter 2 to add a new grade to this course,");
+                    System.out.println("Enter 3 to get the list of registered course names,");
                     System.out.println("Enter 9 to quit:");
                     System.out.printf(" > ");
                     int choice = userInput.nextInt();
                     validInput = true;
                     switch (choice) {
                     case 1:
-                        System.out.println(selectedCourse.toString());
+                        System.out.printf(selectedCourse.toString());
+                        break;
+                    case 2:
+                        // Flushes garbage input to prevent unintended actions
+                        userInput.nextLine();
+                        // Default Grade name and worth are listed
+                        String inputName = "newGrade";
+                        double inputWorth = 10;
+                        boolean validName = false;
+                        boolean validWorth = false;
+                        while (!validName) {
+                            try {
+                                System.out.println("\n" + "Enter a grade name:");
+                                System.out.printf(" > ");
+                                // Check if the name is empty
+                                inputName = userInput.nextLine();
+                                if (!inputName.isEmpty()) {
+                                    validName = true;
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n" + "Invalid grade name; try again.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            }
+                        }
+                        while (!validWorth) {
+                            try {
+                                System.out.println("\n" + "Enter the number of marks this grade is worth:");
+                                System.out.printf(" > ");
+                                inputWorth = userInput.nextDouble();
+                                validWorth = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n" + "Invalid number of marks; try again.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            }
+                        }
+                        Grade newGrade = new Grade(inputName, inputWorth);
+                        selectedCourse.addItem(newGrade);
+                        //selectedCourse.calculateOverallMark();
+                        //System.out.println("\n" + selectedCourse.findGrade("Grade #1"));
+                        //System.out.println(selectedCourse.getOverallMark());
+                        break;
+                    case 3:
+                        try {
+                            // Check if no grades are registered in the course
+                            if (selectedCourse.getGradeNames().isEmpty()) {
+                                System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
+                                break;
+                            }
+                            //System.out.println("\n" + selectedCourse.findGrade("Grade #1"));
+                            System.out.println(selectedCourse.getGradeNames());
+                        } catch (NullPointerException e) {
+                            System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
+                        }
                         break;
                     case 9:
                         userHasQuit = true;
