@@ -1,12 +1,14 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class Course {
 
     private String name;
     private int creditContribution;
-    private Grade[] marks;
+    private List<Grade> marksList = new ArrayList<Grade>();
     private double overallMark;
     private double currMark;
     private double projectedMark;
-    private int nextItem;
     /*
      *  Initializes the course, given:
      *  a course name
@@ -16,11 +18,9 @@ public class Course {
     public Course(String theName, int size, int credits) {
         this.name = theName;
         this.creditContribution = credits;
-        this.marks = new Grade[size];
         this.overallMark = 0.0;
         this.currMark = 0.0;
         this.projectedMark = 0.0;
-        this.nextItem = 0;
     }
     // Sets the name of the course to the passed in name
     public void setName(String newName) {
@@ -35,14 +35,27 @@ public class Course {
         return creditContribution;
     }
     /*
+     *  Displays names of Grades corresponding to their index 'i'
+     *  values in the marksList. Each name is shown as
+     *  "[i]. [gradeName]", with each Grade separated by newlines.
+     */
+    public String getGradeNames() {
+        String s = "";
+        for (int i = 0; i < marksList.size(); i++) {
+            s += "\n";
+            s += i + ". " + marksList.get(i).getName();
+        }
+        return s;
+    }
+    /*
      *  Called on whenever you update one of the grades within
-     *  the course's array of marks
+     *  the course's marksList
      *  It resets the current mark to be 0.0, and gets the total
      *  percent of the course that has been defined to have been
      *  covered. This is determined by checking each item to see if 
      *  it has a current grade attached to it; if it does, add that
      *  mark's worth to a temporary double.
-     *  After the array has been searched, goes through the array again
+     *  After the list has been searched, goes through the list again
      *  and adds a value resulting from the following formula to the
      *  current mark:
      *      ( mark's worth / overall worth ) * mark's current mark
@@ -53,14 +66,14 @@ public class Course {
     public void calculateCurrMark() {
         this.currMark = 0.0;
         double totalObtainedWorth = 0;
-        for (int i = 0; i < nextItem; i++) {
-            if (marks[i].getCurrMark() != 0.0) 
-                totalObtainedWorth += marks[i].getWorth();
+        for (int i = 0; i < marksList.size(); i++) {
+            if (marksList.get(i).getCurrMark() != 0.0) 
+                totalObtainedWorth += marksList.get(i).getWorth();
         }
         double tempMark = 0.0;
-        for (int i = 0; i < nextItem; i++) {
-            tempMark = marks[i].getCurrMark();
-            this.currMark += (marks[i].getWorth()/totalObtainedWorth)
+        for (int i = 0; i < marksList.size(); i++) {
+            tempMark = marksList.get(i).getCurrMark();
+            this.currMark += (marksList.get(i).getWorth()/totalObtainedWorth)
                              *tempMark;
         }
         
@@ -72,14 +85,14 @@ public class Course {
     /*
      *  This method is designed to calculate the overall mark
      *  of the course. It begins by setting the overall mark
-     *  to 0.0, and from there it cycles through the array, adding
+     *  to 0.0, and from there it cycles through the list, adding
      *  the product of the mark's worth and the mark's current mark
      *  to the overall mark.
      */
     public void calculateOverallMark() {
         this.overallMark = 0.0;
-        for (int i = 0; i < nextItem; i++) { 
-            overallMark += marks[i].getWorth()*marks[i].getCurrMark();
+        for (int i = 0; i < marksList.size(); i++) { 
+            overallMark += marksList.get(i).getWorth()*marksList.get(i).getCurrMark();
         }
     }
     // Returns the overall mark
@@ -87,78 +100,43 @@ public class Course {
         return overallMark;
     }
     /*
-     *  Checks first to see if the next slot "available"
-     *  in the array is within the scope of the array, increases
-     *  size of array if this is not the case
-     *  It then adds the item to the next available slot in the array
-     *  and increments the nextItem reference to point at the next 
-     *  available array spot.
+     *  Appends a new grade to the end of marksList.
      *  Next, it checks to see if the item that was added has a current
      *  grade attached to it. If it does, recalculate the current mark
      *  and overall marks for the course. 
      */
     public void addItem(Grade newItem) {
-        if (nextItem > marks.length)
-            this.increaseArraySize();
-        // Check for an initial condition with an empty marks[] array
-        // and set nextItem to be one larger than marks.length, then
-        // increment the array size
-        if (nextItem == 0 && marks.length == 0) {
-            ++nextItem;
-            this.increaseArraySize();
-        }
-        marks[nextItem++] = newItem;
+        marksList.add(newItem);
         if (newItem.getCurrMark() != 0.0) {
             this.calculateCurrMark();
             this.calculateOverallMark();
         }
     }
     /*
-     * Increases the array size by one whenever called
-     * to prevent NullPointerExceptions.
-     */
-    public void increaseArraySize() {
-        Grade[] temp = new Grade[marks.length+1];
-        for (int i = 0; i < marks.length; i++) {
-            temp[i] = marks[i];
-        }
-        marks = temp;
-    }
-    /*
-     *  Searches array for passed in Grade, and when found,
-     *  shuffles it to the end of the array.
-     *  Afterwards, if the item was found then the last item in the
-     *  array (which is now the item we wanted to delete) is nullified
-     *  and nextItem is decremented by 1.
+     *  Searches array for passed in Grade, and if found,
+     *  removes it from the marksList. If not found, it indicates that
+     *  no grades have been removed from the marksList.
      */
     public void deleteItem(Grade toDel) {
-        Grade temp = null;
-        boolean isPresent = false;
-        for (int i = 0; i < nextItem; i++) {
-            if (marks[i].getName().equals(toDel.getName()) 
-                && i != nextItem-1) {
-                isPresent = true;
-                temp = marks[i];
-                marks[i] = marks[i+1];
-                marks[i+1] = temp;              
-            }
+        if (marksList.contains(toDel)) {
+            marksList.remove(toDel);
+            System.out.println("\n" + "Deleted the " + toDel + "grade.");
         }
-        if (isPresent) {
-            marks[--nextItem] = null;
-            System.out.println("Deleted the following Grade" + toDel);
+        else {
+            System.out.println("\n" + "No grades were found with the name " + toDel + ".");
         }
     }
     /*
      *  Using a passed in String with the item's name, searches
-     *  the array for the item with the corresponding name
+     *  the marksList for the item with the corresponding name
      *  and when found, returns it.
      *  If the item is not found, prints a message stating
      *  that this case has been reached and returns null.
      */
     public Grade findGrade(String name) {
-        for (int i = 0; i < nextItem; i++) {
-            if (marks[i].getName().equals(name)) {
-                return marks[i];
+        for (int i = 0; i < marksList.size(); i++) {
+            if (marksList.get(i).getName().equals(name)) {
+                return marksList.get(i);
             }
         }
         System.out.println(name + " not found.");
@@ -172,19 +150,6 @@ public class Course {
         s += "\n" + name + "\n";
         s += "Credits: " + creditContribution + "\n";
         s += "Current Mark: " + currMark;
-        return s;
-    }
-    /*
-     *  Displays names of Grades corresponding to their index 'i'
-     *  values in the marks[] array. Each name is shown as
-     *  "[i]. [gradeName]", with each Grade separated by newlines.
-     */
-    public String getGradeNames() {
-        String s = "";
-        for (int i = 0; i < marks.length; i++) {
-            s += "\n";
-            s += i + ". " + marks[i].getName();
-        }
         return s;
     }
 }
