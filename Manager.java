@@ -1,8 +1,7 @@
-// This class contains an array which contains the users classes
+// This class contains an ArrayList which contains the users classes
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Manager {
 
