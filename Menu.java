@@ -32,7 +32,7 @@ public class Menu {
             while (!validInput) {
                 try {
                     System.out.println("\n" + "----------");
-                    System.out.println("\n" + "Menu for " + theManager.getName());
+                    System.out.println("\n" + theManager.getName());
                     System.out.println("\n" + "Enter 1 to get the list of registered course names,");
                     System.out.println("Enter 2 to register a new course,");
                     System.out.println("Enter 3 to delete a registered course,");
@@ -166,7 +166,7 @@ public class Menu {
             while (!validInput) {
                 try {
                     System.out.println("\n" + "----------");
-                    System.out.println("\n" + "Menu for " + selectedCourse.getName());
+                    System.out.println("\n" + "Menu for course: " + selectedCourse.getName());
                     System.out.println("\n" + "Enter 1 to get a string with this course's details,");
                     System.out.println("Enter 2 to add a new grade to this course,");
                     System.out.println("Enter 3 to get the list of registered grade names,");
@@ -275,7 +275,6 @@ public class Menu {
                             System.out.println(selectedCourse.getGradeNames());
                             System.out.print(" > ");
                             inputInt = userInput.nextInt();
-                            System.out.println();
                             System.out.print(selectedCourse.getGradeInfo(inputInt));
                         } catch (InputMismatchException e) {
                             System.out.println("\n" + "Invalid number; try again.");
