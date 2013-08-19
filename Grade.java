@@ -9,12 +9,12 @@ public class Grade {
      * Constructor for the Grade, which only requires a description 
      * and worth to course
      */
-    public Grade(String theName, double theWorth) {
+    public Grade(String theName, double theWorth, int totalScore, int myScore) {
         this.name = theName;
         this.worth = theWorth;
         this.currMark = 0.0;
-        this.myScore = 0;
-        this.totalScore = 0;
+        this.myScore = myScore;
+        this.totalScore = totalScore;
     }
     // Re-assigns a description for the Grade
     public void setName(String newName) {
@@ -40,8 +40,8 @@ public class Grade {
     public double getCurrMark() {
         return currMark;
     }
-    /* Calculates current mark, if your score and total score are 
-     * defined
+    /*  Calculates current mark, if your score and total score are 
+     *  defined.
      */
     public void calculateCurrMark() {
         double temp = (double)myScore * (double)totalScore;
@@ -74,10 +74,10 @@ public class Grade {
         if (myScore != 0) 
             s += "Your score on this item: " + myScore + "\n";
         if (totalScore != 0) 
-            s += "Total possible score: " + totalScore + "\n";
+            s += "Total possible score on this item: " + totalScore + "\n";
         if (currMark != 0.0)
-            s += "Current mark: " + currMark + "%\n";
-        s += "Worth to final mark: " + worth + "%\n";
+            s += "Percentage aquired on this item (Your score/Total score): " + currMark + "%\n";
+        s += "This item's worth to your final mark: " + worth + "%\n";
         return s;
     }   
 }

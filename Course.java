@@ -12,10 +12,9 @@ public class Course {
     /*
      *  Initializes the course, given:
      *  a course name
-     *  amount of items you want in course
      *  the credit worth.
      */
-    public Course(String theName, int size, int credits) {
+    public Course(String theName, int credits) {
         this.name = theName;
         this.creditContribution = credits;
         this.overallMark = 0.0;
@@ -47,6 +46,10 @@ public class Course {
         }
         return s;
     }
+    // Gets the size of the marksList
+    public int getMarksListSize() {
+        return marksList.size();
+    }
     /*
      *  Called on whenever you update one of the grades within
      *  the course's marksList
@@ -76,7 +79,6 @@ public class Course {
             this.currMark += (marksList.get(i).getWorth()/totalObtainedWorth)
                              *tempMark;
         }
-        
     }
     // Returns the current mark
     public double getCurrMark() {
@@ -113,17 +115,19 @@ public class Course {
         }
     }
     /*
-     *  Searches array for passed in Grade, and if found,
-     *  removes it from the marksList. If not found, it indicates that
-     *  no grades have been removed from the marksList.
+     *  Searches marksList for passed in grade based on input integer,
+     *  and if found, removes it from the marksList. If integer is
+     *  greater or equal to the size of marksList, it
+     *  indicates that no grades have been removed from the marksList.
      */
-    public void deleteItem(Grade toDel) {
-        if (marksList.contains(toDel)) {
+    public void deleteItem(int toDel) {
+        // Don't delete a nonexistent Grade in marksList
+        if (toDel < marksList.size()) {
             marksList.remove(toDel);
-            System.out.println("\n" + "Deleted the " + toDel + "grade.");
+            System.out.println("\n" + "Deleted the grade.");
         }
         else {
-            System.out.println("\n" + "No grades were found with the name " + toDel + ".");
+            System.out.println("\n" + "Invalid number; try again.");
         }
     }
     /*
@@ -139,7 +143,7 @@ public class Course {
                 return marksList.get(i);
             }
         }
-        System.out.println(name + " not found.");
+        System.out.println("\n" + "Could not find a grade with that name.");
         return null;
     }
     /*
@@ -151,5 +155,35 @@ public class Course {
         s += "Credits: " + creditContribution + "\n";
         s += "Current Mark: " + currMark;
         return s;
+    }
+    /*  Shows information about a grade in marksList based on a passed
+     *  in integer value. If the grade exists, return a string with
+     *  the necessary information, else return nothing and state that
+     *  the passed in integer is invalid.
+     */
+    public String getGradeInfo(int checkGrade) {
+        String s = "";
+        // Do not check grade if checkGrade is greater or equal to the
+        // list size
+        if (checkGrade < marksList.size()) {
+            s += "\n";
+            s += marksList.get(checkGrade).toString();
+            return s;
+        }
+        else {
+            System.out.println("\n" + "Invalid number; try again.");
+        }
+        return null;
+    }
+    /*  Sets a specific grade's currMark according to its index number.
+     */
+    public void setGradeCurrMark(int i) {
+        try {
+        //double getMark;
+        marksList.get(i).calculateCurrMark();
+        //getMark = marksList.get(i).getCurrMark()
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("\n" + "Invalid number; try again.");
+        }
     }
 }

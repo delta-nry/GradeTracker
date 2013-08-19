@@ -1,4 +1,8 @@
-// This class contains an ArrayList which contains the users classes
+/*  This class contains an ArrayList which contains the users classes.
+ *  There should only be one Manager instance in Menu.java, as
+ *  this Manager class holds the ArrayList of all the courses the user
+ *  needs, and each course contains all the grades the user needs.
+ */
 
 import java.util.List;
 import java.util.ArrayList;
@@ -9,7 +13,7 @@ public class Manager {
     private String name;
     // Constructor that creates an array which contains courses
     public Manager() {
-        this.name = "Manager";
+        this.name = "Course Manager";
     }
     // Returns the assigned description
     public String getName() {
@@ -37,7 +41,7 @@ public class Manager {
         }
         return s;
     }
-    // Gets the size of the courseList array
+    // Gets the size of the courseList
     public int getCourseListSize() {
         return courseList.size();
     }
@@ -46,12 +50,14 @@ public class Manager {
         courseList.add(newItem);
     }
     // Deletes course in the last index number of courseList.
-    public void deleteLastCourse() {
-        if (courseList.size() >= 1) {
-            courseList.remove(courseList.size() - 1);
+    public void deleteCourse(int toDel) {
+        // Don't delete a nonexistent Course in courseList
+        if (toDel < courseList.size()) {
+            courseList.remove(toDel);
+            System.out.println("\n" + "Deleted the course.");
         }
         else {
-            System.out.println("\n" + "There are no courses to delete.");
+            System.out.println("\n" + "Invalid number; try again.");
         }
     }
 }
