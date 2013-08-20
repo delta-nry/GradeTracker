@@ -284,12 +284,7 @@ public class Menu {
                             System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
                             // Flushes garbage input to prevent unintended actions
                             userInput.nextLine();
-                        } 
-                        /*catch (UnknownFormatConversionException e) {
-                            System.out.println("\n" + "Invalid number; try again.");
-                            // Flushes garbage input to prevent unintended actions
-                            userInput.nextLine();
-                        }*/
+                        }
                         break;
                     case 5:
                         try {

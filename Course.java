@@ -179,9 +179,7 @@ public class Course {
      */
     public void setGradeCurrMark(int i) {
         try {
-        //double getMark;
         marksList.get(i).calculateCurrMark();
-        //getMark = marksList.get(i).getCurrMark()
         } catch (IndexOutOfBoundsException e) {
             System.out.println("\n" + "Invalid number; try again.");
         }

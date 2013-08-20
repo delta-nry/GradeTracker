@@ -77,7 +77,7 @@ public class Grade {
             s += "Total possible score on this item: " + totalScore + "\n";
         if (currMark != 0.0)
             s += "Percentage aquired on this item (Your score/Total score): " + currMark + "%\n";
-        s += "This item's worth to your final mark: " + worth + "%\n";
+        s += "This item's worth to your final mark for this course: " + worth + "%\n";
         return s;
     }   
 }
