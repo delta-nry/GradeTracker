@@ -45,16 +45,16 @@ public class Grade {
 	 */
 	public void calculateCurrMark() {
 		double temp = (double)myScore * (double)totalScore;
-		if (temp > 1000.0)
-			this.currMark = temp/100;
-		else
-			this.currMark = temp;
+		this.currMark = temp;
 	}
 	// Assigns the score you got on the marked item
 	public void setMyScore(int newScore) {
-		this.myScore = newScore;
-		if (totalScore != 0)
+		if (totalScore != 0) {
+			this.myScore = newScore;
 			this.calculateCurrMark();
+		} else {
+			System.out.println("No total score defined. Define total score.");
+		}
 	}	
 	// Returns the score you got on the marked item
 	public int getMyScore() {
