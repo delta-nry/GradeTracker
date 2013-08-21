@@ -172,6 +172,7 @@ public class Menu {
                     System.out.println("Enter 3 to get the list of registered grade names,");
                     System.out.println("Enter 4 to get the details of a registered grade,");
                     System.out.println("Enter 5 to delete a registered grade,");
+                    System.out.println("Enter 6 to set the mark of a registered grade,");
                     System.out.println("Enter 9 to go back to the course manager:");
                     System.out.print(" > ");
                     int choice = userInput.nextInt();
@@ -186,12 +187,8 @@ public class Menu {
                         // Default Grade name and worth are listed
                         String inputName = "newGrade";
                         double inputWorth = 10;
-                        int inputTotalScore = 10;
-                        int inputScore = 10;
                         boolean validName = false;
                         boolean validWorth = false;
-                        boolean validTotalScore = false;
-                        boolean validScore = false;
                         while (!validName) {
                             try {
                                 System.out.println("\n" + "Enter a name of the new grade you want to add:");
@@ -219,33 +216,8 @@ public class Menu {
                                 userInput.nextLine();
                             }
                         }
-                        while (!validTotalScore) {
-                            try {
-                                System.out.println("\n" + "Enter the maximum amount of marks this grade can be out of:");
-                                System.out.print(" > ");
-                                inputTotalScore = userInput.nextInt();
-                                validTotalScore = true;
-                            } catch (InputMismatchException e) {
-                                System.out.println("\n" + "Invalid number of marks; try again.");
-                                // Flushes garbage input to prevent unintended actions
-                                userInput.nextLine();
-                            }
-                        }
-                        while (!validScore) {
-                            try {
-                                System.out.println("\n" + "Enter the amount of marks out of " + inputTotalScore + " that you have earned in this grade:");
-                                System.out.print(" > ");
-                                inputScore = userInput.nextInt();
-                                validScore = true;
-                            } catch (InputMismatchException e) {
-                                System.out.println("\n" + "Invalid number of marks; try again.");
-                                // Flushes garbage input to prevent unintended actions
-                                userInput.nextLine();
-                            }
-                        }
-                        Grade newGrade = new Grade(inputName, inputWorth, inputTotalScore, inputScore);
+                        Grade newGrade = new Grade(inputName, inputWorth);
                         selectedCourse.addItem(newGrade);
-                        selectedCourse.setGradeCurrMark(selectedCourse.getMarksListSize() - 1);
                         break;
                     case 3:
                         try {
@@ -310,6 +282,66 @@ public class Menu {
                             // Flushes garbage input to prevent unintended actions
                             userInput.nextLine();
                         } 
+                        break;
+                    case 6:
+                        // Flushes garbage input to prevent unintended actions
+                        userInput.nextLine();
+                        // Default Grade name and worth are listed
+                        int inputInt = -1;
+                        int inputTotalScore = 10;
+                        int inputScore = 10;
+                        boolean validInt = false;
+                        boolean validTotalScore = false;
+                        boolean validScore = false;
+                        // Check if no grades are registered in the course
+                        if (selectedCourse.getGradeNames().isEmpty()) {
+                            System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
+                            break;
+                        }
+                        while (!validInt) {
+                            try {
+                                System.out.println("Enter the number of the registered grade you want to modify:");
+                                System.out.println(selectedCourse.getGradeNames());
+                                System.out.print(" > ");
+                                inputInt = userInput.nextInt();
+                                validInt = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n" + "Invalid number; try again.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            } catch (NullPointerException e) {
+                                System.out.println("\n" + "No grades are registered in this course; try adding a new one.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            }
+                        }
+                        while (!validTotalScore) {
+                            try {
+                                System.out.println("\n" + "Enter the maximum amount of marks this grade can be out of:");
+                                System.out.print(" > ");
+                                inputTotalScore = userInput.nextInt();
+                                validTotalScore = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n" + "Invalid number of marks; try again.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            }
+                        }
+                        while (!validScore) {
+                            try {
+                                System.out.println("\n" + "Enter the amount of marks out of " + inputTotalScore + " that you have earned in this grade:");
+                                System.out.print(" > ");
+                                inputScore = userInput.nextInt();
+                                validScore = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("\n" + "Invalid number of marks; try again.");
+                                // Flushes garbage input to prevent unintended actions
+                                userInput.nextLine();
+                            }
+                            selectedCourse.setGradeTotalScore(inputInt, inputTotalScore);
+                            selectedCourse.setGradeMyScore(inputInt, inputScore);
+                            //selectedCourse.setGradeCurrMark(selectedCourse.getMarksListSize() - 1);
+                        }
                         break;
                     case 9:
                         userHasQuit = true;

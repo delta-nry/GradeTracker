@@ -1,0 +1,95 @@
+8
+
+Econ103 3
+Midterm1 0.25 0.83 
+Midterm2 0.25 0.60 
+Lab 0.10 0.90 
+Final 0.40 0.65 
+
+English135 3 
+Rhetoric 0.20 0.79 
+Summary 0.15 0.80 
+InClass 0.15 0.79 
+Research 0.25 0.83 
+Final 0.25 0.77 
+
+Phil100 6 
+Test1 0.15 0.70 
+Essay1 0.20 0.75 
+Test2 0.15 0.7667 
+Test3 0.15 0.6667 
+Essay2 0.20 0.775 
+Test4 0.20 0.70 
+
+Phil201 3 
+Assignment1 0.025 0.0
+Assignment2 0.025 0.75 
+Assignment3 0.025 0.85 
+Test1 0.15 0.92 
+Assignment4 0.025 1.00 
+Assignment5 0.025 0.85 
+Assignment6 0.025 0.80 
+Test2 0.15 0.88 
+Assignment7 0.025 0.0
+Assignment8 0.025 0.80 
+Assignment9 0.025 0.85 
+Test3 0.15 0.88 
+Assignment10 0.025 0.0
+Assignment11 0.025 0.0
+Assignment12 0.025 0.775 
+Test4 0.15 0.70 
+Assignment13 0.025 0.0
+Assignment14 0.025 0.85 
+Assignment15 0.025 0.90 
+Test5 0.15 0.84 
+
+Phil203 3 
+Assignment1 0.025 0.70 
+Assignment2 0.025 0.70 
+Assignment3 0.025 0.80 
+Assignment4 0.025 0.70 
+Assignment5 0.025 0.90 
+Assignment6 0.025 0.70 
+Assignment7 0.025 0.0
+Assignment8 0.025 0.75 
+Assignment9 0.025 0.40 
+Assignment10 0.025 0.0
+Assignment11 0.025 0.0
+Assignment12 0.025 0.65 
+BonusAssign 0.025 0.75 
+Test1 0.15 0.89 
+Test2 0.15 0.90 
+Test3 0.15 0.80 
+Test4 0.15 0.95 
+
+CSC110 3 
+Lab 0.02 1.00  
+Assign1 0.04 0.60 
+Assign2 0.04 0.80 
+Assign3 0.04 0.70 
+Assign4 0.04 1.00 
+Assign5 0.04 0.65 
+Assign6 0.04 0.45 
+Assign7 0.04 0.8 
+Midterm1 0.16 0.8857 
+Midterm2 0.16 0.8923 
+Final 0.38 0.80 
+
+Psyc100A 3 
+Assign1 0.10 0.925 
+Assign2 0.10 0.95 
+Assign3 0.10 1.00 
+Quiz1 0.05 0.8667 
+Exam1 0.20 0.845 
+Exam2 0.20 0.7222 
+Exam3 0.20 0.90 
+Lab1 0.025 1.00 
+Lab2 0.025 0.89 
+Lab3 0.03 1.00 
+Lab4 0.02 1.00 
+
+Writ102 3 
+InstrProfile 0.25 0.77 
+EventRep 0.30 0.85 
+Freelance 0.30 0.90 
+Final 0.15 0.90 
