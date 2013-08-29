@@ -1,3 +1,14 @@
+/*
+ *	Representation of a marked assignment in a course
+ *	TRY CHANGING INTO ABSTRACT CLASS
+ *	Contains:
+ *	- a String representing the name (i.e. "Midterm 1");
+ *	- a double representing the current mark
+ *	- a double representing its worth towards overall course
+ *	- an integer representing user's score on the assignment
+ *	- an integer representing user's total possible score on assignment
+ *	Only the name and worth are absolutely required to create a Grade.
+ */
 public class Grade {
 
 	private String name;
@@ -13,6 +24,17 @@ public class Grade {
 		this.name = theName;
 		this.worth = theWorth;
 		this.currMark = 0.0;
+		this.myScore = 0;
+		this.totalScore = 0;
+	}
+	/*
+	 *	Constructor for an already marked Grade, which requires
+	 *	a description, worth to course, and the mark in double form
+	 */
+	public Grade(String theName, double theWorth, double mark) {
+		this.name = theName;
+		this.worth = theWorth;
+		this.currMark = mark;
 		this.myScore = 0;
 		this.totalScore = 0;
 	}
@@ -44,7 +66,8 @@ public class Grade {
 	 * defined
 	 */
 	public void calculateCurrMark() {
-		double temp = (double)myScore * (double)totalScore;
+		double temp = (double)myScore/(double)totalScore;
+		temp *= 100;
 		this.currMark = temp;
 	}
 	// Assigns the score you got on the marked item
