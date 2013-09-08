@@ -1,106 +1,76 @@
 /*
- *	Representation of a marked assignment in a course
- *	TRY CHANGING INTO ABSTRACT CLASS
- *	Contains:
- *	- a String representing the name (i.e. "Midterm 1");
- *	- a double representing the current mark
- *	- a double representing its worth towards overall course
- *	- an integer representing user's score on the assignment
- *	- an integer representing user's total possible score on assignment
- *	Only the name and worth are absolutely required to create a Grade.
+ *	Abstract implementation of the Grade object.
+ *	This allows for multiple types of Grades to be implemented,
+ *	so that the user can have a more accurate projection of their
+ *	final mark when requested.
+ *	Currently, the following types are implemented:
+ *	- Assignment
+ *	- Quiz
+ *	- Test
+ *	- Lab
+ *	- Participation
+ *	- Essay
  */
-public class Grade {
-
+public abstract class Grade {
+	
 	private String name;
-	private double currMark;
 	private double worth;
+	private double currMark;
 	private int myScore;
 	private int totalScore;
-	/*
-     * Constructor for the Grade, which only requires a description 
-	 * and worth to course
-	 */
-	public Grade(String theName, double theWorth) {
-		this.name = theName;
-		this.worth = theWorth;
-		this.currMark = 0.0;
-		this.myScore = 0;
-		this.totalScore = 0;
-	}
-	/*
-	 *	Constructor for an already marked Grade, which requires
-	 *	a description, worth to course, and the mark in double form
-	 */
-	public Grade(String theName, double theWorth, double mark) {
-		this.name = theName;
-		this.worth = theWorth;
-		this.currMark = mark;
-		this.myScore = 0;
-		this.totalScore = 0;
-	}
-	// Re-assigns a description for the Grade
+	
+	public abstract String getType();
+	// Sets name to passed in name
 	public void setName(String newName) {
-		this.name = newName;
-	}	
-	// Returns the assigned description
+			this.name = newName;
+	}
+	// Returns the name of this Grade
 	public String getName() {
-		return name;
+			return name;
 	}
-	// Re-assigns the worth of this Grade towards the course mark
+	// Sets the worth of this grade towards overall mark, provided it is greater than 0 and less than 1
 	public void setWorth(double newWorth) {
-		this.worth = newWorth;
-	}
-	// Returns assigned worth towards course mark
+		if (newWorth > 0.0 && newWorth < 1.0) 
+			this.worth = newWorth;
+	} 
+	// Returns worth of overall mark
 	public double getWorth() {
 		return worth;
 	}
-	// Assigns a percentage-based mark to the Grade
+	// Sets current mark to passed in mark, provided it is greater than 0
 	public void setCurrMark(double theMark) {
-		this.currMark = theMark;
+		if (theMark > 0.0) 
+			this.currMark = theMark;
 	}
-	// Returns current mark
+	// Returns overall mark
 	public double getCurrMark() {
 		return currMark;
 	}
-	/* Calculates current mark, if your score and total score are 
-	 * defined
-	 */
+	// Given my score and total score, calculates current mark
 	public void calculateCurrMark() {
 		double temp = (double)myScore/(double)totalScore;
 		temp *= 100;
 		this.currMark = temp;
 	}
-	// Assigns the score you got on the marked item
+	// Sets my score only if total score is more than 0 and new score is greater than 0
 	public void setMyScore(int newScore) {
-		if (totalScore != 0) {
+		if (totalScore != 0 && newScore > 0) {
 			this.myScore = newScore;
 			this.calculateCurrMark();
-		} else {
-			System.out.println("No total score defined. Define total score.");
 		}
-	}	
-	// Returns the score you got on the marked item
+	}
+	// Returns my score
 	public int getMyScore() {
 		return myScore;
 	}
-	// Assigns the maximum score you can achieve on this item
+	// Sets total score, provided it is greater than 0
 	public void setTotalScore(int maxScore) {
-		this.totalScore = maxScore;
+		if (maxScore > 0)
+			this.totalScore = maxScore;
 	}
-	// Returns the total score possible on the assignment
+	// Returns total score of Grade
 	public int getTotalScore() {
 		return totalScore;
 	}
-	// Concatenates any non-zero values into a String to be returned
-	public String toString() {
-		String s = name + "\n";
-		if (myScore != 0) 
-			s += "Your score on this item: " + myScore + "\n";
-		if (totalScore != 0) 
-			s += "Total possible score: " + totalScore + "\n";
-		if (currMark != 0.0)
-			s += "Current mark: " + currMark + "%\n";
-		s += "Worth to final mark: " + worth + "%\n";
-		return s;
-	}	
+	
 }

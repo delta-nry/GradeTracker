@@ -90,37 +90,38 @@ public class Manager {
 	public double getCourseContribution(Course c) {
 		double mark = c.getOverallMark();
 		double temp = 0.0;
-		if (mark < 50.0) {		  //(0,50]
+		if (mark < 50.0) {		 
 			temp = 0.0;
-		} else if (mark < 52.0) { //(50,52]
+		} else if (mark < 52.0) { 
 			temp = 0.70;
-		} else if (mark < 55.0) { //(52,55]
+		} else if (mark < 55.0) { 
 			temp = 1.00;
-		} else if (mark < 59.0) { //(55,59]
+		} else if (mark < 59.0) {
 			temp = 1.30;
-		} else if (mark < 61.0) { //(59,61]
+		} else if (mark < 61.0) { 
 			temp = 1.70;
-		} else if (mark < 63.0) { //(61,63]
+		} else if (mark < 63.0) { 
 			temp = 2.00;
-		} else if (mark < 65.0) { //(63,65]
+		} else if (mark < 65.0) { 
 			temp = 2.30;
-		} else if (mark < 68.0) { //(65,68]
+		} else if (mark < 68.0) { 
 			temp = 2.70;
-		} else if (mark < 71.0) { //(68,71]
+		} else if (mark < 71.0) { 
 			temp = 3.00;
-		} else if (mark < 74.0) { //(71,74]
+		} else if (mark < 74.0) { 
 			temp = 3.30;
-		} else if (mark < 83.0) { //(74,83]
+		} else if (mark < 83.0) { 
 			temp = 3.70;
-		} else if (mark < 92.0) { //(83,92]
+		} else if (mark < 92.0) { 
 			temp = 3.90;
-		} else { 				  //(92,100]
+		} else { 				  
 			temp = 4.00;
 		} 
 		return temp*c.getCreditContribution();
 	}
 	// returns the GPA accumulated as of far
-	public double returnGPA() {
+	public double getGPA() {
+		this.calculateGPA();
 		return GPA;
 	}
 }
