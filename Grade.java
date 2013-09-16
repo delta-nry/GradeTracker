@@ -1,16 +1,16 @@
 /*
- *	Abstract implementation of the Grade object.
- *	This allows for multiple types of Grades to be implemented,
- *	so that the user can have a more accurate projection of their
- *	final mark when requested.
- *	Currently, the following types are implemented:
- *	- Assignment
- *	- Quiz
- *	- Test
- *	- Lab
- *	- Participation
- *	- Essay
- */
+*	Abstract implementation of the Grade object.
+*	This allows for multiple types of Grades to be implemented,
+*	so that the user can have a more accurate projection of their
+*	final mark when requested.
+*	Currently, the following types are implemented:
+*	- Assignment
+*	- Quiz
+*	- Test
+*	- Lab
+*	- Participation
+*	- Essay
+*/
 public abstract class Grade {
 	
 	private String name;
