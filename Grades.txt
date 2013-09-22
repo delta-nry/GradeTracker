@@ -19,7 +19,7 @@ Essay1 0.20 0.75
 Test2 0.15 0.7667 
 Test3 0.15 0.6667 
 Essay2 0.20 0.775 
-Test4 0.20 0.70 
+Test4 0.15 0.70 
 
 Phil201 3 
 Assignment1 0.025 0.0
